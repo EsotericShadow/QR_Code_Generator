@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="theme-color" content="#193043" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  <title>QR Code Generator</title>
+  <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <video autoplay loop muted playsinline id="bg-video">
+    <source src="assets/bg.mp4" type="video/mp4">
+  </video>
+  <div id="overlay"></div>
+  <div class="container">
+    <h1 class="text-center my-4">
+      <i class="bi bi-qr-code"></i> QR Code Generator
+    </h1>
+    <div class="row justify-content-center">
+      <div class="col-md-6">
+        <div class="card p-5">
+          <form>
+            <div class="mb-4">
+              <label for="url" class="form-label">URL:</label>
+              <input type="text" class="form-control" id="url" placeholder="Enter URL" />
+            </div>
+            <!-- Module Shape -->
+            <div class="mb-4">
+              <label for="moduleShape" class="form-label">Module Shape:</label>
+              <select class="form-select" id="moduleShape">
+                <option value="square" selected>Square</option>
+                <option value="rounded">Rounded</option>
+                <option value="circle">Circle</option>
+                <option value="vertical">Vertical Bars</option>
+                <option value="horizontal">Horizontal Bars</option>
+              </select>
+            </div>
+            <!-- Color Mode -->
+            <div class="mb-4">
+              <label class="form-label">Color Mode:</label>
+              <div>
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="radio" name="colorMode" id="colorModeSolid" value="solid" checked>
+                  <label class="form-check-label" for="colorModeSolid">Solid Color</label>
+                </div>
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="radio" name="colorMode" id="colorModeGradient" value="gradient">
+                  <label class="form-check-label" for="colorModeGradient">Gradient</label>
+                </div>
+              </div>
+            </div>
+            <!-- Solid Color Options (Initially Visible) -->
+            <div id="solidColorOptions" class="mb-4">
+              <label for="fillColor" class="form-label">Solid Fill Color:</label>
+              <input type="color" class="form-control form-control-color" id="fillColor" value="#000000" />
+            </div>
+            <!-- Gradient Options (Initially Hidden) -->
+            <div id="gradientOptions" class="mb-4" style="display: none;">
+              <label for="gradientType" class="form-label">Gradient Type:</label>
+              <select class="form-select mb-2" id="gradientType">
+                <option value="radial" selected>Radial</option>
+                <option value="square">Square</option>
+                <option value="horizontal">Horizontal</option>
+                <option value="vertical">Vertical</option>
+              </select>
+              <div class="row">
+                <div class="col">
+                  <label for="gradientColor1" class="form-label">Gradient Color 1:</label>
+                  <input type="color" class="form-control form-control-color" id="gradientColor1" value="#000000"/>
+                </div>
+                <div class="col">
+                  <label for="gradientColor2" class="form-label">Gradient Color 2:</label>
+                  <input type="color" class="form-control form-control-color" id="gradientColor2" value="#FFFFFF"/>
+                </div>
+              </div>
+            </div>
+            <div class="mb-4">
+              <label for="backColor" class="form-label">Background Color:</label>
+              <input type="color" class="form-control form-control-color" id="backColor" value="#ffffff" />
+            </div>
+            <div class="mb-4">
+              <label for="logo" class="form-label">Logo Image:</label>
+              <input type="file" class="form-control" id="logo" accept="image/*" />
+            </div>
+            <button type="button" class="btn btn-primary w-100" onclick="generateQRCode()">
+              Generate QR Code
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+    <div class="row justify-content-center mt-4">
+      <div class="col-md-6 text-center">
+        <div id="qrcode" class="qr-container">
+          <p class="text-muted">Your QR code will appear here.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>
